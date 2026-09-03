@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="sync_now"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_sync"
+        android:shortcutShortLabel="@string/shortcut_sync_now_short_label"
+        android:shortcutLongLabel="@string/shortcut_sync_now_long_label">
+        <intent
+            android:action="co.chinho.readabilityreader.action.SYNC_NOW"
+            android:targetPackage="co.chinho.readabilityreader"
+            android:targetClass="co.chinho.readabilityreader.MainActivity" />
+    </shortcut>
+</shortcuts>

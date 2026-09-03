@@ -1,0 +1,27 @@
+package co.chinho.readabilityreader.domain.model
+
+data class Article(
+    val id: Long,
+    val feedId: Long,
+    val title: String,
+    val url: String,
+    val content: String?,
+    val publishedAt: Long,
+    val isRead: Boolean,
+    val isSaved: Boolean,
+    val thumbnailUrl: String?,
+    val isCached: Boolean,
+    val feedTitle: String? = null,
+    val feedFaviconUrl: String? = null,
+    val focalX: Int = 50,
+    val focalY: Int = 50,
+    val score: Double? = null,
+    val primaryTopic: String? = null,
+    val secondaryTopics: String? = null,
+    val region: String? = null,
+    val articleType: String? = null,
+    val vote: String? = null,
+    val freshness: Double? = null,
+    val pairTerms: String? = null,
+    val snippetText: String? = null,
+)

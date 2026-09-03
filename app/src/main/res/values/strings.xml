@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ReadabilityReader</string>
+    <string name="shortcut_sync_now_short_label">Sync Now</string>
+    <string name="shortcut_sync_now_long_label">Sync Articles Now</string>
+</resources>
