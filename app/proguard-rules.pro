@@ -57,3 +57,18 @@
 -dontwarn okio.**
 -dontwarn coil.**
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# -----------------------------------------------------------------------------
+# Tink / EncryptedSharedPreferences
+# androidx.security pulls in Tink, which references Error Prone annotations that
+# are compile-time only and absent at runtime. They are never loaded, so the
+# references are safe to ignore -- without this R8 fails the build outright.
+# -----------------------------------------------------------------------------
+-dontwarn com.google.errorprone.annotations.**
+
+# Tink also carries optional GCP/AWS KMS integrations this app never uses. Do not
+# add a blanket -keep for com.google.crypto.tink.**: that retains those classes and
+# drags in Google API client and Joda-Time, which are not on the classpath.
+# androidx.security ships its own consumer rules for what Tink genuinely needs.
+-dontwarn com.google.api.client.http.**
+-dontwarn org.joda.time.**
