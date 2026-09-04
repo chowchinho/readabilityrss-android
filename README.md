@@ -1,8 +1,14 @@
 # Readability Reader
 
-A native Android RSS reader for **any FEVER-compatible backend**, built with Kotlin and
-Jetpack Compose. Designed around offline reading, adaptive phone/tablet layouts, and
-first-class E-Ink support.
+The native Android client for
+**[ReadabilityRSS](https://github.com/chowchinho/readabilityrss-web)**, a self-hosted
+full-text RSS reader. Built with Kotlin and Jetpack Compose, and designed around offline
+reading, adaptive phone/tablet layouts, and first-class E-Ink support.
+
+It talks to the server over the FEVER API, so it also works with **any FEVER-compatible
+backend** — Miniflux, FreshRSS, Tiny Tiny RSS. Pairing it with ReadabilityRSS additionally
+unlocks full-article extraction, ML ranking and focal-point thumbnails; see
+[Pairing with ReadabilityRSS](#pairing-with-readabilityrss) below.
 
 Distributed as a sideloadable APK. Not on the Play Store.
 
@@ -56,9 +62,10 @@ radio off.
 
 ## Setting up a server
 
-The app speaks only the [FEVER API](https://feedafever.com/api), so it works with any
-server implementing it — **Miniflux**, **FreshRSS**, **Tiny Tiny RSS** (via the Fever
-plugin), or Fever itself.
+The app speaks only the [FEVER API](https://feedafever.com/api). Use
+**[ReadabilityRSS](https://github.com/chowchinho/readabilityrss-web)** for the full
+experience, or any other server implementing the API — **Miniflux**, **FreshRSS**,
+**Tiny Tiny RSS** (via the Fever plugin), or Fever itself.
 
 On first run you are asked for:
 
@@ -89,16 +96,27 @@ Run the test suite with:
 ./gradlew testDebugUnitTest
 ```
 
-## A note on scope
+## Pairing with ReadabilityRSS
 
-This is the Android client only. It was built against a personal, self-hosted backend that
-adds some optional server-side extras — machine-learning article ranking, server-computed
-image focal points for smart thumbnail cropping, and archival export to a self-hosted notes
-server. **That backend is not public.**
+This app is the Android client for
+**[ReadabilityRSS](https://github.com/chowchinho/readabilityrss-web)** — a self-hosted
+FastAPI server that fetches each article, extracts the real content, repairs images
+publishers hide behind lazy-loading, and exposes the result over a Fever-compatible
+endpoint at `/fever?api`.
 
-Everything in the Features list above works against any FEVER server. The optional extras
-degrade cleanly when the server does not implement them: articles fall back to
-reverse-chronological order, thumbnails centre-crop, and the export UI simply goes unused.
+Everything in the Features list works against any FEVER server. These additional features
+require ReadabilityRSS specifically, because they depend on endpoints the FEVER spec does
+not define:
+
+| Feature | Needs ReadabilityRSS |
+|---|---|
+| Full article text rather than truncated feed summaries | yes |
+| ML ranking — personalised ordering, swipe voting, score breakdown | yes |
+| Server-computed image focal points for smart thumbnail cropping | yes |
+| Archival export of saved articles | yes |
+
+Each degrades cleanly without it: articles fall back to reverse-chronological order,
+thumbnails centre-crop, and the export path simply goes unused. Nothing breaks.
 
 ## Architecture
 
