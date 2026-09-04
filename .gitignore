@@ -18,6 +18,8 @@ local.properties
 keystore.properties
 *.p12
 /app/release/
+*.apk
+*.aab
 .claude/settings.local.json
 
 # Debug & development artifacts
