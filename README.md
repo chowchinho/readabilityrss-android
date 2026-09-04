@@ -55,6 +55,14 @@ radio off.
 - Expedited manual refresh, foreground-service progress notifications.
 - Multiple server profiles; credentials stored in `EncryptedSharedPreferences`.
 
+**Archiving**
+- Optional export to **[Jotty](https://github.com/fccview/jotty)**, a self-hosted notes
+  app. Saving an article converts it to Markdown and POSTs it to your Jotty server.
+- Failed exports queue with the *already-formatted* content, so a retry never depends on
+  the source article still being cached — which matters, because the local cache is
+  time- and size-evicted.
+- Configured independently in Settings with its own server URL and API key.
+
 ## Requirements
 
 - Android 12 (API 31) or newer
@@ -113,10 +121,13 @@ not define:
 | Full article text rather than truncated feed summaries | yes |
 | ML ranking — personalised ordering, swipe voting, score breakdown | yes |
 | Server-computed image focal points for smart thumbnail cropping | yes |
-| Archival export of saved articles | yes |
 
-Each degrades cleanly without it: articles fall back to reverse-chronological order,
-thumbnails centre-crop, and the export path simply goes unused. Nothing breaks.
+Each degrades cleanly without it: articles fall back to reverse-chronological order and
+thumbnails centre-crop. Nothing breaks.
+
+[Jotty](https://github.com/fccview/jotty) export is **not** in this table — it talks to
+your Jotty server directly, with its own URL and API key, and is independent of whichever
+FEVER backend you use.
 
 ## Architecture
 
